@@ -45,5 +45,6 @@ guid = "guid-group"
 
 **در قسمت guid چت آیدی-guid گروهتون رو ،قرار بدید**
 
-آموزش دریافت guid و auth در تلگرام دنبال کنید : t.me/Hanma_bot_rubika
+تمامی آموزشات در چنل روبیکا ما : 
+rubika.ir/Hanma_bot
 
