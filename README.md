@@ -51,4 +51,4 @@ guid = "guid-group"
 
 ‌‌
 تمامی آموزشات در چنل روبیکا ما :
-[Rubika](rubika.ir/Hanma_bot)
+[Rubika](https://rubika.ir/Hanma_bot)
