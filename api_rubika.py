@@ -1,4 +1,4 @@
-text_cr =" Telegram me : @A_ABOL\n Github : https://github.com/abolX\n Rubika : @elctro_bot\n"
+text_cr =" Telegram me : @A_ABOL\n Github : https://github.com/abolX\n Rubika : @electro_bot\n"
 
 from re import findall
 from random import randint, choice
