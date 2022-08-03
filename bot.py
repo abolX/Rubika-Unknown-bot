@@ -70,7 +70,7 @@ while True:
 										
 										if user["user_guid"] in open('guids.txt', 'r').read().split('\n'):
 											bot.send_message(guid, "پیام شما به " + user.get('first_name') + " ارسال شد ✅")
-											bot.send_message(user["user_guid"],  "سلام " + user.get('first_name') + " پیام ناشناس داری😃!" + " ".join(msg["last_message"]["text"].split(" ")[1:]))
+											bot.send_message(user["user_guid"],  "سلام " + user.get('first_name') + " پیام ناشناس داری😃!\n\n" + " ".join(msg["last_message"]["text"].split(" ")[1:]))
 										
 										else: 
 											bot.send_message(guid, texts.txt_not_join)
