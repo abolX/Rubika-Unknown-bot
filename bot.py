@@ -2,14 +2,14 @@ from api_rubika import Bot
 from text import texts
 
 bot = Bot("auth")
-#   auth         !
+# در قسمت auth توکن یا شناسه اکانت خود را وارد کنید !
 
 
 """
 	Telegram me : @A_ABOL
 	Github : https://github.com/abolX 
 	Rubika : @elctro_bot
-	           !
+	هر گونه کپی برداری و استفاده به نام خود حرام است !
 """
 
 answered = []
@@ -39,12 +39,12 @@ while True:
 							name = bot.get_user_info(guid)["data"]["user"]["first_name"]
 							
 							if not guid in open('guids.txt', 'r').read().split('\n'):
-								bot.send_message(guid, " " + name + texts.txt_welcome)
+								bot.send_message(guid, "سلام " + name + texts.txt_welcome)
 								
 								with open('guids.txt', 'a') as f:
 									f.write('\n' + guid)
 							else:
-								bot.send_message(guid, " " + name + "  ")
+								bot.send_message(guid, "سلام " + name + " عزیز 🌹")
 						except:
 							bot.send_message(guid, texts.txt_error)
 							
@@ -69,8 +69,8 @@ while True:
 										user = check["user"]
 										
 										if user["user_guid"] in open('guids.txt', 'r').read().split('\n'):
-											bot.send_message(guid, "   " + user.get('first_name') + "   ")
-											bot.send_message(user["user_guid"],  " " + user.get('first_name') + "   !" + " ".join(msg["last_message"]["text"].split(" ")[1:]))
+											bot.send_message(guid, "پیام شما به " + user.get('first_name') + " ارسال شد ✅")
+											bot.send_message(user["user_guid"],  "سلام " + user.get('first_name') + " پیام ناشناس داری😃!" + " ".join(msg["last_message"]["text"].split(" ")[1:]))
 										
 										else: 
 											bot.send_message(guid, texts.txt_not_join)
