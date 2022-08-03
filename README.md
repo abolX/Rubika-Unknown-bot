@@ -33,4 +33,4 @@ bot.py را ران بکنید
 
 ‌‌
 تمامی آموزشات در چنل روبیکا ما :
-[Rubika](https://rubika.ir/Elctro_bot)
+[Rubika](https://rubika.ir/Electro_bot)
