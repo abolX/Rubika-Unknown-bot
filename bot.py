@@ -8,7 +8,7 @@ bot = Bot("auth")
 """
 	Telegram me : @A_ABOL
 	Github : https://github.com/abolX 
-	Rubika : @elctro_bot
+	Rubika : @electro_bot
 	هر گونه کپی برداری و استفاده به نام خود حرام است !
 """
 
