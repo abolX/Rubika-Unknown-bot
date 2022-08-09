@@ -111,22 +111,30 @@ class Bot:
 					t = False
 			return p
 		
-	def editMessage(self, message_id, guid, newText):
-		return post(json={"api_version":"5","auth":self.auth,"data_enc":self.enc.encrypt(dumps({
-			"method":"editMessage",
-			"input":{
-				"message_id":message_id,
-				"object_guid":guid,
-				"text":newText 
-			},
-			"client":{
-				"app_name":"Main",
-				"app_version":"4.0.4",
-				"platform":"Web",
-				"package":"web.rubika.ir",
-				"lang_code":"fa"
-			}
-		}))},url="https://messengerg2c67.iranlms.ir/")
+	def edit_message(self, message_id, guid, newText):
+		edit = False
+		while edit == False:
+			try:
+				edited = post(json={"api_version":"5","auth":self.auth,"data_enc":self.enc.encrypt(dumps({
+					"method":"editMessage",
+					"input":{
+						"message_id":message_id,
+						"object_guid":guid,
+						"text":newText 
+					},
+					"client":{
+						"app_name":"Main",
+						"app_version":"4.0.4",
+						"platform":"Web",
+						"package":"web.rubika.ir",
+						"lang_code":"fa"
+					}
+				}))},url="https://messengerg2c68.iranlms.ir/")
+				return edited
+				edit = True
+			except: edit = False
+		return edited
+
 		
 	def delete_messages(self, chat_id, message_ids):
 		return loads(self.enc.decrypt(post(json={"api_version":"5","auth":self.auth,"data_enc":self.enc.encrypt(dumps({
@@ -145,7 +153,7 @@ class Bot:
 			}
 		}))},url="https://messengerg2c17.iranlms.ir/").json()["data_enc"]))
 		
-	def update(self):
+	def chats_update(self):
 		time_stamp = str(round(datetime.today().timestamp()) - 200)
 		p = post(json={"api_version":"5","auth": self.auth,"data_enc":self.enc.encrypt(dumps({
 			"method":"getChatsUpdates",
@@ -203,8 +211,7 @@ class Bot:
 				}))},url="https://messengerg2c23.iranlms.ir/").json().get("data_enc")))
 				return s
 				t = True
-			except:
-				t = False
+			except: t = False
 		return s
 		
 	def get_message_info(self, chat_id, message_ids):
@@ -223,4 +230,124 @@ class Bot:
 				}
 					
 			}))}, url="https://messengerg2c64.iranlms.ir/").json()["data_enc"])).get("data").get("messages")
+			
+	def join_group(self, link):
+		join = False
+		while join == False:
+			try:
+				joined = loads(self.enc.decrypt(post(json={"api_version":"5","auth": self.auth,"data_enc":self.enc.encrypt(dumps({
+					"method":"joinGroup",
+					"input":{
+						"hash_link": link.split('/')[-1]},
+					"client":{
+						"app_name": "Main",
+						"app_version" : "4.0.4",
+						"platform": "Web",
+						"package": "web.rubika.ir",
+						"lang_code": "fa"
+					}
+				}))},url="https://messengerg2c17.iranlms.ir/").json()["data_enc"]))
+				return joined
+				join = True
+			except: join = False
+		return joined
+				
+	def leave_group(self, group_guid):
+		leave = False
+		while leave == False:
+			try:
+				leaved = loads(self.enc.decrypt(post(json={"api_version":"5","auth": self.auth,"data_enc":self.enc.encrypt(dumps({
+					"method":"leaveGroup",
+					"input":{
+						"group_guid": group_guid},
+					"client":{
+						"app_name": "Main",
+						"app_version" : "4.0.4",
+						"platform": "Web",
+						"package": "web.rubika.ir",
+						"lang_code": "fa"
+					}
+					}))},url="https://messengerg2c17.iranlms.ir/").json()["data_enc"]))
+				return leaved
+				leave = True
+			except: leave = False
+		return leaved
+
+	def block(self, chat_id):
+		block = False
+		while block == False:
+			try:
+				blocked = loads(self.enc.decrypt(post(json={"api_version": "5", "auth": self.auth, "data_enc": self.enc.encrypt(dumps({
+					"method": "setBlockUser",
+					"input":{
+						"action": "Block",
+						"user_guid": chat_id
+					},
+					"client":{
+						"app_name": "Main",
+						"app_version" : "4.0.4",
+						"platform": "Web",
+						"package": "web.rubika.ir",
+						"lang_code": "fa"
+					}
+					}))},url="https://messengerg2c17.iranlms.ir/").json()["data_enc"]))
+				return blocked
+				block = True
+			except: block = False
+		return blocked
+		
+	def check_join_group(self, chat_id, text):
+		return loads(self.enc.decrypt(post(json={"api_version":"5", "auth": self.auth, "data_enc": self.enc.encrypt(dumps({
+			"method": "getGroupAllMembers",
+			"input":{
+				"group_guid": chat_id,
+				"search_text": text
+			},
+			"client":{
+				"app_name":"Main",
+				"app_version":"4.0.8",
+				"platform":"Web",
+				"package":"web.rubika.ir",
+				"lang_code":"fa"
+			}
+			}))},url="https://messengerg2c23.iranlms.ir/").json()["data_enc"]))
+			
+	def search(self, chat_id, text):
+		return loads(self.enc.decrypt(post(json={"api_version":"5","auth": self.auth,"data_enc":self.enc.encrypt(dumps({
+			"method": "searchChatMessages",
+			"input":{
+				"object_guid": chat_id,
+				"search_text": text,
+				"type": "Text"
+			},
+			"client":{
+				"app_name":"Main",
+				"app_version":"4.0.8",
+				"platform":"Web",
+				"package":"web.rubika.ir",
+				"lang_code":"fa"
+			}
+			}))},url="https://messengerg2c17.iranlms.ir/").json()["data_enc"]))
+			
+	def send_poll(self, chat_id, question, options):
+		p = post(json={"api_version":"5","auth":self.auth,"data_enc":self.enc.encrypt(dumps({
+			"method":"createPoll",
+			"input":{
+				"allows_multiple_answers": False,
+				"is_anonymous": True,
+				"object_guid":chat_id,
+				"options": options,
+				"question": question,
+				"rnd":f"{randint(100000,999999999)}",
+				"type": "Regular"
+			},
+			"client":{
+				"app_name":"Main",
+				"app_version":"4.0.8",
+				"platform":"Web",
+				"package":"web.rubika.ir",
+				"lang_code":"fa"
+			}
+			}))},url="https://messengerg2c64.iranlms.ir/")
+		return loads(self.enc.decrypt(p.json()["data_enc"]))
 		
